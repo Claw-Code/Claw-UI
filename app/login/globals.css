@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Gaming-inspired dark theme */
+    --background: 215 25% 6%;
+    --foreground: 210 40% 98%;
+    --card: 215 25% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 215 25% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 0 0% 60%; /* grey */
+    --primary-foreground:  210 40% 98%;
+    --secondary: 215 25% 12%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 25% 12%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 0 0% 60%; /* grey */
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 25% 18%;
+    --input: 215 25% 18%;
+    --ring: 0 0% 60%; /* grey */
+    --radius: 0.75rem;
+    
+    /* Gaming specific colors */
+    --game-glow: 0 0% 60%; /* grey */
+    --game-accent: 180 100% 70%;
+    --game-warning: 48 96% 53%;
+    --game-success: 142 76% 36%;
+    --game-surface: 215 25% 10%;
+    --game-surface-elevated: 215 25% 14%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 60%) 0%, hsl(0 0% 70%) 100%);
+    --gradient-surface: linear-gradient(145deg, hsl(215 25% 8%) 0%, hsl(215 25% 12%) 100%);
+    --gradient-glow: radial-gradient(circle at center, hsl(0 0% 60% / 0.3) 0%, transparent 70%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(0 0% 60% / 0.4);
+    --shadow-card: 0 4px 12px hsl(215 25% 4% / 0.4);
+    --shadow-elevated: 0 8px 32px hsl(215 25% 4% / 0.6);
+    
+    /* Sidebar */
+    --sidebar-background: 215 25% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 0 0% 60%; /* grey */
+    --sidebar-primary-foreground: 215 25% 6%;
+    --sidebar-accent: 215 25% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 25% 18%;
+    --sidebar-ring: 0 0% 60%; /* grey */
+  }
+
+  .dark {
+    --background: 215 25% 6%;
+    --foreground: 210 40% 98%;
+    --card: 215 25% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 215 25% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 0 0% 60%; /* grey */
+    --primary-foreground:  210 40% 98%;
+    --secondary: 215 25% 12%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 25% 12%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 0 0% 60%; /* grey */
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 25% 18%;
+    --input: 215 25% 18%;
+    --ring: 0 0% 60%; /* grey */
+    --sidebar-background: 215 25% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 0 0% 60%; /* grey */
+    --sidebar-primary-foreground: 215 25% 6%;
+    --sidebar-accent: 215 25% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 25% 18%;
+    --sidebar-ring: 0 0% 60%; /* grey */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-surface);
+  }
+  
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+}
+
+@layer components {
+  /* Gaming UI Components */
+  .game-card {
+    @apply bg-card border border-border rounded-lg shadow-lg;
+    background: var(--gradient-surface);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .game-button {
+    @apply relative overflow-hidden rounded-lg font-medium transition-all duration-200;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .game-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
+  
+  .game-input {
+    @apply bg-input border border-border rounded-lg px-3 py-2 text-foreground placeholder:text-muted-foreground;
+    background: hsl(var(--game-surface));
+    transition: all 0.2s ease;
+  }
+  
+  .game-input:focus {
+    @apply ring-2 ring-ring border-primary;
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+  }
+  
+  .glow-effect {
+    position: relative;
+  }
+  
+  .glow-effect::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+  }
+}
+
+/* Scrollbars and editor styles unchanged */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: hsl(var(--game-surface)); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--game-accent))); border-radius: 4px; border: 1px solid hsl(var(--border)); }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(45deg, hsl(var(--primary) / 0.8), hsl(var(--game-accent) / 0.8)); }
+
+/* Monaco editor and animations unchanged */
+.monaco-editor { background-color: hsl(var(--game-surface)) !important; color: hsl(var(--foreground)) !important; }
+.monaco-editor .margin { background-color: hsl(var(--game-surface-elevated)) !important; }
+.monaco-editor .monaco-editor-background { background-color: hsl(var(--game-surface)) !important; }
+.monaco-editor .cursor { color: hsl(var(--primary)) !important; }
+.monaco-editor .selected-text { background-color: hsl(var(--primary) / 0.2) !important; }
+
+@keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 5px hsl(var(--primary) / 0.5); } 50% { box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.4); } }
+@keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-slideInRight { animation: slideInRight 0.4s ease-out; }
+.animate-fadeInUp { animation: fadeInUp 0.5s ease-out; }
+
+*:focus { outline: none; }
+*:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 2px; }
+
+.glass { background: hsla(var(--background) / 0.8); backdrop-filter: blur(12px); border: 1px solid hsla(var(--border) / 0.5); }
+.glass-strong { background: hsla(var(--background) / 0.9); backdrop-filter: blur(20px); border: 1px solid hsla(var(--border) / 0.8); }
+
+.text-glow { text-shadow: 0 0 10px hsl(var(--primary) / 0.5); }
+.text-glow-strong { text-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--primary) / 0.4); }
